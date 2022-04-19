@@ -2,21 +2,22 @@
   import { navigate } from "svelte-navigator";
   import { toast } from "@zerodevx/svelte-toast";
   import { baseURL } from "../store/generalStore.js"
+  import { user } from "../store/generalStore.js";
 
-  let user = {};
+  let chosenUser = {};
   let responseMessage = "";
   let errorMessage = "";
   async function signup() {
     if (
-      user?.email &&
-      user?.password
+      chosenUser?.email &&
+      chosenUser?.password
     ) {
       const res = await fetch($baseURL + "/auth/signup", {
         headers: {
           "content-type": "application/json",
         },
         method: "POST",
-        body: JSON.stringify(user),
+        body: JSON.stringify(chosenUser),
       });
 
       responseMessage = await res.text();
@@ -43,11 +44,12 @@
         "content-type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify(user),
+      body: JSON.stringify(chosenUser),
     });
     responseMessage = await res.text();
     if (res.status === 200) {
       console.log("success");
+      user.set({ loggedIn: true});
       navigate("/about", { replace: true });
     } else {
       toast.push("Something went wrong, try again", {
@@ -76,12 +78,12 @@
         <form>
           <div class="form-group">
             <!-- svelte-ignore a11y-label-has-associated-control -->
-            <label>Username</label>
+            <label>Email</label>
             <input
               type="text"
               class="form-control"
-              placeholder="Username"
-              bind:value={user.email}
+              placeholder="Email"
+              bind:value={chosenUser.email}
             />
           </div>
           <div class="form-group">
@@ -91,7 +93,7 @@
               type="password"
               class="form-control"
               placeholder="Password"
-              bind:value={user.password}
+              bind:value={chosenUser.password}
             />
             <small class="signup-error-message">
               {errorMessage}
