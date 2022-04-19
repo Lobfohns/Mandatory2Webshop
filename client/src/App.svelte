@@ -13,6 +13,7 @@
   };
 	
 </script>
+
 <Router>
 	<nav>
 		<Link to="/" class='link' >Home</Link>
@@ -20,8 +21,6 @@
 	</nav>
 
   <main>
-
-
 	<SvelteToast {options} />
 	<Route path="/" component={Home} />
   <PrivateRoute path="/beers" let:location>
