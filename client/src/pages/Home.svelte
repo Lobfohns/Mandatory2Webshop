@@ -50,7 +50,7 @@
     if (res.status === 200) {
       console.log("success");
       user.set({ loggedIn: true});
-      navigate("/about", { replace: true });
+      navigate("/beers", { replace: true });
     } else {
       toast.push("Something went wrong, try again", {
         theme: {
@@ -72,6 +72,8 @@
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 </head>
 <main>
+  <h1>Register or login to be redirected and see beers</h1>
+  <h3>If you try to go to beers without logging in you will be redirected back here</h3>
   <div class="main">
     <div class="col-md-6 col-sm-12">
       <div class="login-form">
@@ -95,9 +97,6 @@
               placeholder="Password"
               bind:value={chosenUser.password}
             />
-            <small class="signup-error-message">
-              {errorMessage}
-            </small>
           </div>
           <button type="button" class="btn btn-black" on:click={() => login()}
             >Login</button
@@ -113,27 +112,22 @@
 </main>
 <style>
   .main {
-    padding: 0px 10px;
-    /* min-height: calc(100vh - 60px); */
+    padding: 0px 5px;
+    
   }
   @media screen and (max-width: 450px) {
     .login-form {
-      margin-top: 10%;
+      margin-top: 20%;
     }
-    /* .register-form{
-        margin-top: 10%;
-    } */
+    
   }
   @media screen and (min-width: 768px) {
     .main {
       margin-left: 40%;
     }
     .login-form {
-      margin-top: 80%;
+      margin-top: 0%;
     }
-    /* .register-form{
-        margin-top: 20%;
-    } */
   }
   .btn-black {
     background-color: #000 !important;
@@ -144,10 +138,6 @@
     --toastContainerRight: auto;
     --toastContainerBottom: 8rem;
     --toastContainerLeft: calc(50vw - 8rem);
-  }
-  .signup-error-message {
-    color: red;
-    font-weight: 500;
   }
 </style>
 

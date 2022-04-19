@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
-//import nodemailer from "nodemailer";
 import ipasRouter from "./routers/ipasRouter.js"
-import nonipasRouter from "./routers/ipasRouter.js"
+import nonipasRouter from "./routers/nonipasRouter.js"
 import usersRouter from "./routers/usersRouter.js"
 import path from "path";
 import helmet from "helmet";
@@ -40,18 +39,11 @@ app.use(session({
 }));
 app.use(express.json());
 app.use(cors());
-//app.use(nodemailer());
 app.use(express.static(path.resolve("../client/public")));
 app.use(ipasRouter, nonipasRouter, usersRouter);
 app.use(helmet());
 app.use(baseLimiter);
 app.use("/auth", authLimiter);
-
-
-
-
-
-
 
 
 

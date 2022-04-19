@@ -6,6 +6,6 @@ router.get("/api/nonipas", async (req, res) => {
     const nonipas = await db.all("SELECT * FROM nonipas;");
 
     res.send({ data: nonipas })
-})
+});
 
 export default router;
